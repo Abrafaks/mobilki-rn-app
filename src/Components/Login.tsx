@@ -1,4 +1,4 @@
-import {Button, View} from "react-native";
+import {Button, StyleSheet, View} from "react-native";
 import React from "react";
 import * as LocalAuthentication from "expo-local-authentication";
 import {useDispatch} from "react-redux";
@@ -10,12 +10,10 @@ const Login = (props) => {
 
     const loginHandler = async (user) => {
 
-            const result = await LocalAuthentication.authenticateAsync({
-                disableDeviceFallback: true,
-                cancelLabel: "Cancel",
-            });
-
-
+        const result = await LocalAuthentication.authenticateAsync({
+            disableDeviceFallback: true,
+            cancelLabel: "Cancel",
+        });
 
         if (result.success) {
             // Successful Authentication
@@ -30,10 +28,17 @@ const Login = (props) => {
     };
 
     return (
-        <View>
-            <Button title="Log in" onPress={loginHandler}/>
+        <View style={styles.container}>
+            <Button title="Log in with fingerprint" onPress={loginHandler}/>
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        margin: 5,
+        width: '100%'
+    },
+});
 
 export default Login;

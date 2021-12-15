@@ -1,4 +1,4 @@
-import {Button, Text, TextInput, View} from "react-native";
+import {Button, StyleSheet, Text, TextInput, View} from "react-native";
 import React, {useEffect, useState} from "react";
 import * as SecureStore from 'expo-secure-store';
 import {useDispatch} from "react-redux";
@@ -27,18 +27,31 @@ export const ChangeNote = (props) => {
     }
 
     const setNewNote = async (e) => {
-         await SecureStore.setItemAsync('note', note)
+         await SecureStore.setItemAsync('note', note )
 
         dispatch(setEvent('Note changed successfully'))
     }
 
     return (
-        <View>
+        <View style={styles.container}>
             <Text>Your current note:</Text>
-            <TextInput onChangeText={onChangeNote} value={note}></TextInput>
+            <TextInput style={styles.input} onChangeText={onChangeNote} value={note}></TextInput>
             <Button title="Change note" onPress={setNewNote} />
         </View>
     );
 };
 
 
+const styles = StyleSheet.create({
+    container: {
+        width: '100%',
+        margin: 20,
+        padding: 10,
+        borderWidth: 1
+    },
+    input: {
+        borderWidth: 1,
+        padding: 10,
+        margin: 12
+    }
+});
